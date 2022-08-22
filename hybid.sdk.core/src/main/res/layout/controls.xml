@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/videoPlayerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <net.pubnative.lite.sdk.vpaid.widget.CountDownView
+            android:id="@+id/count_down"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="5dp" />
+
+        <net.pubnative.lite.sdk.vpaid.widget.LinearCountDownView
+            android:id="@+id/linear_count_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start" />
+
+        <ImageView
+            android:id="@+id/muteView"
+            android:layout_width="@dimen/mute_view_size"
+            android:layout_height="@dimen/mute_view_size"
+            android:scaleType="center"
+            android:src="@drawable/unmute" />
+
+        <ImageView
+            android:id="@+id/skipView"
+            android:layout_width="@dimen/skip_view_size"
+            android:layout_height="@dimen/skip_view_size"
+            android:layout_gravity="end"
+            android:scaleType="center"
+            android:src="@drawable/skip"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/openURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:background="@drawable/open_url_background"
+        android:clickable="true"
+        android:textSize="16sp"
+        android:focusable="true"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/learn_more"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
+
+    <include layout="@layout/end_card" />
+
+</FrameLayout>

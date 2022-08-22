@@ -1,0 +1,48 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url 'https://verve.jfrog.io/artifactory/verve-gradle-dev' }
+        maven { url 'https://verve.jfrog.io/artifactory/verve-gradle-release' }
+        maven { url 'https://maven.ogury.co' }
+        maven {
+            url 'http://repo.numbereight.ai/artifactory/gradle-release-local'
+            allowInsecureProtocol = true
+        }
+        maven { url 'https://android-sdk.is.com/' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url 'https://verve.jfrog.io/artifactory/verve-gradle-dev' }
+        maven { url 'https://verve.jfrog.io/artifactory/verve-gradle-release' }
+        maven { url 'https://maven.ogury.co' }
+        maven {
+            url 'http://repo.numbereight.ai/artifactory/gradle-release-local'
+            allowInsecureProtocol = true
+        }
+        maven { url 'https://android-sdk.is.com/' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+
+rootProject.name = "SanboxRuntimeProject"
+include ':app'
+include ':hybid.sdk.logger'
+include ':hybid.sdk.core'
+include ':hybid.sdk.reporting'
+include ':hybid.sdk.fullscreen'
+include ':hybid.sdk'
+include ':hybid.sdk.native'
+include ':hybid.sdk.rewarded'
+include ':hybid.sdk.banner'
+include ':hybid.sdk.viewability'
+include ':hybid.sdk.source.pnapi'
+include ':sdk-interface'
