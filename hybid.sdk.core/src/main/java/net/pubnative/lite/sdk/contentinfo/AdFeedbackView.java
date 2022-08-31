@@ -14,6 +14,7 @@ import net.pubnative.lite.sdk.mraid.MRAIDNativeFeature;
 import net.pubnative.lite.sdk.mraid.MRAIDNativeFeatureListener;
 import net.pubnative.lite.sdk.mraid.MRAIDView;
 import net.pubnative.lite.sdk.mraid.MRAIDViewListener;
+import net.pubnative.lite.sdk.utils.UrlHandler;
 
 public class AdFeedbackView implements MRAIDViewListener, MRAIDNativeFeatureListener {
     public interface AdFeedbackLoadListener {
@@ -27,6 +28,7 @@ public class AdFeedbackView implements MRAIDViewListener, MRAIDNativeFeatureList
     private MRAIDInterstitial mViewContainer;
     private AdFeedbackLoadListener mListener;
     private AdFeedbackData mAdFeedbackData;
+    private UrlHandler mUrlHandlerDelegate;
     private boolean mIsReady = false;
 
     public void prepare(Context context, String url, AdFeedbackLoadListener listener) {
@@ -36,9 +38,10 @@ public class AdFeedbackView implements MRAIDViewListener, MRAIDNativeFeatureList
     public void prepare(Context context, String url, Ad ad,
                         String adFormat, IntegrationType integrationType, AdFeedbackLoadListener listener) {
         if (!TextUtils.isEmpty(HyBid.getContentInfoUrl()) && HyBid.isAdFeedbackEnabled()) {
-            url = HyBid.getContentInfoUrl();
+            url = HyBid.getContentInfoUrl().concat("/index.html?apptoken=").concat(FeedbackMacros.MACRO_APP_TOKEN);
         }
 
+        mUrlHandlerDelegate = new UrlHandler(context);
         mAdFeedbackData = new AdFeedbackDataCollector().collectData(ad, adFormat, integrationType);
 
         FeedbackMacros macroHelper = new FeedbackMacros();
@@ -77,7 +80,7 @@ public class AdFeedbackView implements MRAIDViewListener, MRAIDNativeFeatureList
 
     @Override
     public void mraidNativeFeatureOpenBrowser(String url) {
-
+        mUrlHandlerDelegate.handleUrl(url);
     }
 
     @Override

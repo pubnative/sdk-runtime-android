@@ -42,6 +42,7 @@ import net.pubnative.lite.sdk.models.Ad;
 import net.pubnative.lite.sdk.models.IntegrationType;
 import net.pubnative.lite.sdk.models.RemoteConfigFeature;
 import net.pubnative.lite.sdk.network.PNHttpClient;
+import net.pubnative.lite.sdk.utils.AdRequestRegistry;
 import net.pubnative.lite.sdk.utils.Logger;
 import net.pubnative.lite.sdk.utils.MarkupUtils;
 import net.pubnative.lite.sdk.utils.SignalDataProcessor;
@@ -415,9 +416,12 @@ public class HyBidInterstitialAd implements RequestManager.RequestListener, Inte
             headers.put("User-Agent", userAgent);
         }
 
+        final long initTime = System.currentTimeMillis();
+
         PNHttpClient.makeRequest(mContext, url, headers, null, new PNHttpClient.Listener() {
             @Override
             public void onSuccess(String response) {
+                registerAdRequest(url, response, initTime);
                 if (!TextUtils.isEmpty(response)) {
                     prepareCustomMarkup(zoneId, response);
                 }
@@ -431,6 +435,15 @@ public class HyBidInterstitialAd implements RequestManager.RequestListener, Inte
         });
     }
 
+    private void registerAdRequest(String url, String response, long initTime) {
+        long responseTime = System.currentTimeMillis() - initTime;
+
+        JsonOperations.putJsonString(mPlacementParams, Reporting.Key.AD_REQUEST, url);
+        JsonOperations.putJsonString(mPlacementParams, Reporting.Key.AD_RESPONSE, response);
+        JsonOperations.putJsonLong(mPlacementParams, Reporting.Key.RESPONSE_TIME, responseTime);
+
+        AdRequestRegistry.getInstance().setLastAdRequest(url, response, responseTime);
+    }
 
     protected void invokeOnLoadFinished() {
         long loadTime = -1;

@@ -83,6 +83,7 @@ public class Reporting {
         public static final String VIDEO_AD_IMPRESSION = "impression";
         public static final String WEB_AD_SESSION_INITIALIZED = "web_ad_session_started";
         public static final String VIDEO_AD_SESSION_STOPPED = "session_stopped";
+        public static final String COMPANION_VIEW_END_CARD = "companion_view";
     }
 
     public static final class CreativeType {

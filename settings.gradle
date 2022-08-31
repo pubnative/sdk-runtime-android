@@ -16,7 +16,7 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -33,16 +33,16 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SanboxRuntimeProject"
-include ':app'
+rootProject.name = "PrivacySandboxSample"
+include ':client-app', ':sdk-app'
+include ':sdk-implementation'
 include ':hybid.sdk.logger'
 include ':hybid.sdk.core'
 include ':hybid.sdk.reporting'
-include ':hybid.sdk.fullscreen'
 include ':hybid.sdk'
+include ':hybid.sdk.fullscreen'
 include ':hybid.sdk.native'
 include ':hybid.sdk.rewarded'
 include ':hybid.sdk.banner'
 include ':hybid.sdk.viewability'
 include ':hybid.sdk.source.pnapi'
-include ':sdk-interface'

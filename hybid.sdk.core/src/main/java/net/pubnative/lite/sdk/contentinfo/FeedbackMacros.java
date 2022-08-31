@@ -10,7 +10,7 @@ import net.pubnative.lite.sdk.models.IntegrationType;
 import java.util.Locale;
 
 public class FeedbackMacros {
-    private static final String MACRO_APP_TOKEN = "[APPTOKEN]";
+    public static final String MACRO_APP_TOKEN = "[APPTOKEN]";
     private static final String MACRO_ZONE_ID = "[ZONEID]";
     private static final String MACRO_AUDIO_STATE = "[AUDIOSTATE]";
     private static final String MACRO_APP_VERSION = "[APPVERSION]";

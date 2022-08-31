@@ -404,21 +404,23 @@ public class Ad extends JsonModel implements Serializable, Comparable<Ad> {
 
         String impressionId = "";
 
-        while (index < impressionBeacons.size() && !found) {
-            AdData data = impressionBeacons.get(index);
+        if (impressionBeacons != null) {
+            while (index < impressionBeacons.size() && !found) {
+                AdData data = impressionBeacons.get(index);
 
-            if (!TextUtils.isEmpty(data.getURL())) {
-                Uri uri = Uri.parse(data.getURL());
-                if (uri.getAuthority().equals(PN_IMPRESSION_URL)) {
-                    String idParam = uri.getQueryParameter(PN_IMPRESSION_QUERY_PARAM);
-                    if (!TextUtils.isEmpty(idParam)) {
-                        impressionId = idParam;
-                        found = true;
+                if (!TextUtils.isEmpty(data.getURL())) {
+                    Uri uri = Uri.parse(data.getURL());
+                    if (uri.getAuthority().equals(PN_IMPRESSION_URL)) {
+                        String idParam = uri.getQueryParameter(PN_IMPRESSION_QUERY_PARAM);
+                        if (!TextUtils.isEmpty(idParam)) {
+                            impressionId = idParam;
+                            found = true;
+                        }
                     }
                 }
-            }
 
-            index++;
+                index++;
+            }
         }
 
         return impressionId;
