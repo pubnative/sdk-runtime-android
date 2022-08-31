@@ -80,6 +80,7 @@ public class HyBid {
     private static boolean sLocationUpdatesEnabled = true;
     private static boolean sLocationTrackingEnabled = true;
     private static boolean isCloseVideoAfterFinish = false;
+    private static boolean isCloseVideoAfterFinishForRewarded = false;
     private static boolean isDiagnosticsEnabled = true;
     private static boolean sMraidExpandEnabled = true;
     private static boolean isEndCardEnabled = false;
@@ -422,6 +423,14 @@ public class HyBid {
 
     public static boolean isEndCardEnabled() {
         return isEndCardEnabled;
+    }
+
+    public static void setCloseVideoAfterFinishForRewarded(boolean autoCloseVideoRewarded) {
+        isCloseVideoAfterFinishForRewarded = autoCloseVideoRewarded;
+    }
+
+    public static boolean getCloseVideoAfterFinishForRewarded() {
+        return isCloseVideoAfterFinishForRewarded;
     }
 
     public interface InitialisationListener {

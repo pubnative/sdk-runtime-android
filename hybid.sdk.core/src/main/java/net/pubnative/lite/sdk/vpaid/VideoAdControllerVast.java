@@ -470,14 +470,26 @@ class VideoAdControllerVast implements VideoAdController, IVolumeObserver {
             mSkipTimerWithPause = null;
         }
 
-        if (mEndCardData == null || !HyBid.isEndCardEnabled() ||
-                (mEndCardData.getType() == EndCardData.Type.STATIC_RESOURCE && TextUtils.isEmpty(mImageUri))) {
-            if (skipEvent) {
-                closeSelf();
-            }
+        boolean isAutoClose = false;
+
+        if (isRewarded()) {
+            isAutoClose = HyBid.getCloseVideoAfterFinishForRewarded();
         } else {
-            hasEndcard = true;
-            mViewControllerVast.showEndCard(mEndCardData, mImageUri);
+            isAutoClose = HyBid.getCloseVideoAfterFinish();
+        }
+
+        if (isAutoClose) {
+            closeSelf();
+        } else {
+            if (mEndCardData == null || !HyBid.isEndCardEnabled() ||
+                    (mEndCardData.getType() == EndCardData.Type.STATIC_RESOURCE && TextUtils.isEmpty(mImageUri))) {
+                if (skipEvent) {
+                    closeSelf();
+                }
+            } else {
+                hasEndcard = true;
+                mViewControllerVast.showEndCard(mEndCardData, mImageUri);
+            }
         }
 
         if (skipEvent) {

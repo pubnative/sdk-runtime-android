@@ -6,6 +6,7 @@ import net.pubnative.lite.sdk.DeviceInfo;
 import net.pubnative.lite.sdk.HyBid;
 import net.pubnative.lite.sdk.mraid.MRAIDInterstitial;
 import net.pubnative.lite.sdk.mraid.MRAIDView;
+import net.pubnative.lite.sdk.utils.string.StringEscapeUtils;
 
 import java.util.Locale;
 
@@ -75,7 +76,8 @@ public class FeedbackJSInterface {
             }
 
             if (!TextUtils.isEmpty(data.getCreative())) {
-                stringBuilder.append(getJSFunction(JS_PARAM_CREATIVE, data.getCreative()));
+
+                stringBuilder.append(getJSFunction(JS_PARAM_CREATIVE, StringEscapeUtils.escapeJava(data.getCreative())));
             }
         }
 
@@ -87,6 +89,7 @@ public class FeedbackJSInterface {
             String js = buildJS(data);
 
             if (mraidView != null && !TextUtils.isEmpty(js)) {
+
                 mraidView.injectJavaScript(js);
             }
         }

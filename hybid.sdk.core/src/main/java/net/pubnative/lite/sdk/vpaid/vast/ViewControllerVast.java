@@ -17,6 +17,8 @@ import com.iab.omid.library.pubnativenet.adsession.FriendlyObstructionPurpose;
 
 import net.pubnative.lite.sdk.HyBid;
 import net.pubnative.lite.sdk.InterstitialActionBehaviour;
+import net.pubnative.lite.sdk.analytics.Reporting;
+import net.pubnative.lite.sdk.analytics.ReportingEvent;
 import net.pubnative.lite.sdk.core.R;
 import net.pubnative.lite.sdk.mraid.MRAIDBanner;
 import net.pubnative.lite.sdk.mraid.MRAIDNativeFeatureListener;
@@ -254,6 +256,14 @@ public class ViewControllerVast implements View.OnClickListener {
 
         if (mIsFullscreen) {
             showEndCardCloseButton(endCardCloseDelay);
+        }
+
+        ReportingEvent event = new ReportingEvent();
+        event.setEventType(Reporting.EventType.COMPANION_VIEW_END_CARD);
+        event.setCreativeType(Reporting.CreativeType.VIDEO);
+        event.setTimestamp(System.currentTimeMillis());
+        if (HyBid.getReportingController() != null) {
+            HyBid.getReportingController().reportEvent(event);
         }
     }
 

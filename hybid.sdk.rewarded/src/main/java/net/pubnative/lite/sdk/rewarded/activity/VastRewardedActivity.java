@@ -134,12 +134,20 @@ public class VastRewardedActivity extends HyBidRewardedActivity implements AdPre
         if (mReady) {
             mVideoAd.pause();
         }
+
+        if (mFinished) {
+            mVideoAd.pauseEndCardCloseButtonTimer();
+        }
     }
 
     @Override
     protected void resumeAd() {
         if (!mIsFeedbackFormOpen && mReady) {
             mVideoAd.resume();
+        }
+
+        if (mFinished) {
+            mVideoAd.resumeEndCardCloseButtonTimer();
         }
     }
 
