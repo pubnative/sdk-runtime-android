@@ -1,4 +1,4 @@
-# Privacy Sandbox Sample - Kotlin
+# Privacy Sandbox With HyBid SDK Integration
 
 This is a sample project describing how to
 - implement an SDK to be compatible with SDK Runtime.
